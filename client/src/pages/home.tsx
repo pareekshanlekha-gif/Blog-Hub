@@ -124,65 +124,93 @@ export default function Home() {
       </header>
 
       <main>
-        {/* Highlight Section (Hero) */}
-        <section className="relative pt-12 pb-24 md:pt-24 md:pb-32 overflow-hidden">
+        {/* Highlight Section (Featured Post) */}
+        <section className="pt-12 pb-16 md:pt-20 md:pb-24 border-b border-border/40">
           <div className="container mx-auto px-6">
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
-              <div className="md:col-span-5 relative z-10 order-2 md:order-1">
-                <motion.span 
+            <div className="flex flex-col md:flex-row gap-12 items-start">
+              <div className="flex-1 order-2 md:order-1">
+                <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6 }}
-                  className="inline-block mb-4 text-xs font-bold tracking-[0.2em] uppercase text-accent"
                 >
-                  Featured Story
-                </motion.span>
-                <motion.h1 
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.1 }}
-                  className="text-5xl md:text-7xl font-serif font-medium leading-[1.1] mb-6"
-                >
-                  The Quiet <br/> Revolution of <br/> 
-                  <span className="italic text-primary">Simple Design</span>
-                </motion.h1>
-                <motion.p 
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
-                  className="text-lg text-muted-foreground mb-8 max-w-md leading-relaxed"
-                >
-                  Exploring how minimalism is reshaping not just our homes, but our digital landscapes and mental clarity in an age of noise.
-                </motion.p>
-                <motion.div
-                   initial={{ opacity: 0, y: 20 }}
-                   animate={{ opacity: 1, y: 0 }}
-                   transition={{ duration: 0.6, delay: 0.3 }}
-                >
-                  <a href="#" className="inline-flex items-center text-sm font-bold border-b-2 border-foreground hover:border-accent hover:text-accent transition-all pb-1 group" data-testid="hero-cta">
-                    Read the Full Story 
+                  <span className="inline-block mb-6 px-3 py-1 bg-primary/10 text-primary text-[10px] font-bold tracking-widest uppercase rounded-full">
+                    Featured
+                  </span>
+                  <h1 className="text-4xl md:text-6xl font-serif font-semibold leading-[1.1] mb-6 hover:text-primary transition-colors cursor-pointer">
+                    The Quiet Revolution of <br/> Simple Design
+                  </h1>
+                  <p className="text-xl text-muted-foreground mb-8 leading-relaxed max-w-2xl">
+                    Exploring how minimalism is reshaping not just our homes, but our digital landscapes and mental clarity in an age of constant noise.
+                  </p>
+                  <div className="flex items-center gap-4 text-sm font-medium mb-8">
+                    <div className="w-10 h-10 rounded-full bg-secondary overflow-hidden">
+                      <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="Author" className="w-full h-full object-cover" />
+                    </div>
+                    <div>
+                      <span className="block text-foreground">Julian Casablancas</span>
+                      <span className="text-muted-foreground text-xs">Feb 12, 2026 • 8 min read</span>
+                    </div>
+                  </div>
+                  <a href="#" className="inline-flex items-center justify-center px-8 py-4 bg-foreground text-background text-sm font-bold hover:bg-primary hover:text-white transition-all rounded-sm group" data-testid="hero-cta">
+                    Read Story
                     <ArrowRight className="ml-2 w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
                   </a>
                 </motion.div>
               </div>
               
-              <div className="md:col-span-7 relative order-1 md:order-2">
+              <div className="flex-1 order-1 md:order-2 w-full">
                 <motion.div 
-                  initial={{ opacity: 0, scale: 0.95 }}
+                  initial={{ opacity: 0, scale: 0.98 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.8, ease: "easeOut" }}
-                  className="aspect-[4/3] md:aspect-[16/10] overflow-hidden rounded-sm"
+                  className="aspect-[16/10] overflow-hidden rounded-sm shadow-2xl relative group"
                 >
                   <img 
                     src={heroAbstract} 
-                    alt="Abstract art representing design" 
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" 
+                    alt="Featured Story" 
+                    className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-1000" 
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 </motion.div>
-                {/* Decorative elements */}
-                <div className="absolute -bottom-6 -left-6 w-24 h-24 bg-secondary -z-10 rounded-full blur-2xl opacity-60"></div>
-                <div className="absolute top-12 -right-12 w-32 h-32 bg-accent/20 -z-10 rounded-full blur-3xl"></div>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Secondary Featured Section (Grid) */}
+        <section className="py-16 md:py-20 bg-secondary/20 border-b border-border/40">
+          <div className="container mx-auto px-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+              {BLOG_POSTS.slice(0, 3).map((post, idx) => (
+                <motion.div 
+                  key={post.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: idx * 0.1 }}
+                  className="group"
+                >
+                  <div className="aspect-[16/9] overflow-hidden rounded-sm mb-6 bg-muted">
+                    <img 
+                      src={post.image} 
+                      alt={post.title} 
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
+                    />
+                  </div>
+                  <span className="text-accent text-[10px] font-bold tracking-widest uppercase mb-3 block">
+                    {post.category}
+                  </span>
+                  <h3 className="text-xl font-serif font-medium mb-3 group-hover:text-primary transition-colors cursor-pointer leading-tight">
+                    {post.title}
+                  </h3>
+                  <p className="text-muted-foreground text-sm line-clamp-2 mb-4">
+                    {post.excerpt}
+                  </p>
+                  <div className="text-[10px] text-muted-foreground/60 font-mono flex items-center gap-2">
+                    {post.date} • {post.readTime}
+                  </div>
+                </motion.div>
+              ))}
             </div>
           </div>
         </section>
