@@ -84,34 +84,36 @@ export default function Home() {
       {/* Header */}
       <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-md">
         <div className="container mx-auto px-6 h-20 flex items-center justify-between">
-          <div className="hidden md:flex space-x-8">
-            {NAV_LINKS.slice(0, 2).map((link) => (
-              <a 
-                key={link.label} 
-                href={link.href} 
-                className="text-sm font-medium tracking-wide hover:text-accent transition-colors"
-                data-testid={`nav-link-${link.label}`}
-              >
-                {link.label}
-              </a>
-            ))}
-          </div>
-
           <Link href="/" className="text-3xl font-serif font-bold tracking-tight hover:opacity-80 transition-opacity" data-testid="logo">
             Editorial.
           </Link>
 
           <div className="hidden md:flex items-center space-x-8">
-             {NAV_LINKS.slice(2).map((link) => (
-              <a 
-                key={link.label} 
-                href={link.href} 
-                className="text-sm font-medium tracking-wide hover:text-accent transition-colors"
-                data-testid={`nav-link-${link.label}`}
-              >
-                {link.label}
-              </a>
-            ))}
+            <div className="flex space-x-8">
+              {NAV_LINKS.map((link) => (
+                <div key={link.label} className="relative group">
+                  <a 
+                    href={link.href} 
+                    className="text-sm font-medium tracking-wide hover:text-accent transition-colors flex items-center gap-1"
+                    data-testid={`nav-link-${link.label}`}
+                  >
+                    {link.label}
+                    <span className="text-[10px] opacity-50 group-hover:rotate-180 transition-transform duration-300">▼</span>
+                  </a>
+                  {/* Submenu */}
+                  <div className="absolute top-full right-0 pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 translate-y-2 group-hover:translate-y-0">
+                    <div className="bg-white border border-border shadow-xl py-4 w-48 rounded-sm">
+                      <a href="#" className="block px-6 py-2 text-xs font-medium hover:bg-secondary hover:text-accent transition-colors">Latest Stories</a>
+                      <a href="#" className="block px-6 py-2 text-xs font-medium hover:bg-secondary hover:text-accent transition-colors">Editor's Choice</a>
+                      <a href="#" className="block px-6 py-2 text-xs font-medium hover:bg-secondary hover:text-accent transition-colors">Archives</a>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            
+            <div className="h-4 w-px bg-border mx-2"></div>
+            
             <button className="p-2 hover:bg-secondary rounded-full transition-colors" data-testid="search-button">
               <Search className="w-4 h-4" />
             </button>
