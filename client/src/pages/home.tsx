@@ -8,10 +8,12 @@ import blogTech from "../assets/blog-tech.png";
 import blogTravel from "../assets/blog-travel.png";
 
 const NAV_LINKS = [
-  { label: "Culture", href: "#" },
-  { label: "Travel", href: "#" },
-  { label: "Work", href: "#" },
-  { label: "Style", href: "#" },
+  { label: "AI Tools", href: "#", submenu: ["SEO", "AI", "Automation", "Generative Tools"] },
+  { label: "Platforms", href: "#", submenu: ["Facebook", "Instagram", "Shopping", "Google Ads"] },
+  { label: "SEO", href: "#", submenu: ["AEO", "AIO", "Content Marketing", "GEO"] },
+  { label: "Psychology", href: "#", submenu: ["B2B", "B2C", "Ecommerce"] },
+  { label: "Branding", href: "#", submenu: ["B2B", "B2C"] },
+  { label: "Updates", href: "#", submenu: ["Algorithms", "Content", "Media"] },
 ];
 
 const BLOG_POSTS = [
@@ -103,9 +105,11 @@ export default function Home() {
                   {/* Submenu */}
                   <div className="absolute top-full right-0 pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 translate-y-2 group-hover:translate-y-0">
                     <div className="bg-white border border-border shadow-xl py-4 w-48 rounded-sm">
-                      <a href="#" className="block px-6 py-2 text-xs font-medium hover:bg-secondary hover:text-accent transition-colors">Latest Stories</a>
-                      <a href="#" className="block px-6 py-2 text-xs font-medium hover:bg-secondary hover:text-accent transition-colors">Editor's Choice</a>
-                      <a href="#" className="block px-6 py-2 text-xs font-medium hover:bg-secondary hover:text-accent transition-colors">Archives</a>
+                      {link.submenu?.map((item) => (
+                        <a key={item} href="#" className="block px-6 py-2 text-xs font-medium hover:bg-secondary hover:text-accent transition-colors">
+                          {item}
+                        </a>
+                      ))}
                     </div>
                   </div>
                 </div>
@@ -128,7 +132,23 @@ export default function Home() {
         <section className="pt-12 pb-16 md:pt-20 md:pb-24 border-b border-border/40">
           <div className="container mx-auto px-6">
             <div className="flex flex-col md:flex-row gap-12 items-start">
-              <div className="flex-1 order-2 md:order-1">
+              <div className="flex-1 w-full">
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.98 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.8, ease: "easeOut" }}
+                  className="aspect-[16/10] overflow-hidden rounded-sm shadow-2xl relative group"
+                >
+                  <img 
+                    src={heroAbstract} 
+                    alt="Featured Story" 
+                    className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-1000" 
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                </motion.div>
+              </div>
+
+              <div className="flex-1">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -152,26 +172,9 @@ export default function Home() {
                       <span className="text-muted-foreground text-xs">Feb 12, 2026 • 8 min read</span>
                     </div>
                   </div>
-                  <a href="#" className="inline-flex items-center justify-center px-8 py-4 bg-foreground text-background text-sm font-bold hover:bg-primary hover:text-white transition-all rounded-sm group" data-testid="hero-cta">
-                    Read Story
-                    <ArrowRight className="ml-2 w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
+                  <a href="#" className="inline-flex items-center text-foreground hover:text-accent transition-all group" data-testid="hero-cta">
+                    <ArrowRight className="w-8 h-8 transform group-hover:translate-x-2 transition-transform" />
                   </a>
-                </motion.div>
-              </div>
-              
-              <div className="flex-1 order-1 md:order-2 w-full">
-                <motion.div 
-                  initial={{ opacity: 0, scale: 0.98 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.8, ease: "easeOut" }}
-                  className="aspect-[16/10] overflow-hidden rounded-sm shadow-2xl relative group"
-                >
-                  <img 
-                    src={heroAbstract} 
-                    alt="Featured Story" 
-                    className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-1000" 
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 </motion.div>
               </div>
             </div>
@@ -329,7 +332,14 @@ export default function Home() {
               <h4 className="font-bold text-sm uppercase tracking-widest mb-6">Explore</h4>
               <ul className="space-y-4 text-sm text-muted-foreground">
                 {NAV_LINKS.map(link => (
-                  <li key={link.label}><a href={link.href} className="hover:text-foreground transition-colors">{link.label}</a></li>
+                  <li key={link.label} className="group">
+                    <a href={link.href} className="hover:text-foreground transition-colors font-medium">{link.label}</a>
+                    <div className="ml-4 mt-2 space-y-2 border-l border-border pl-4">
+                      {link.submenu?.map(sub => (
+                        <a key={sub} href="#" className="block text-[10px] hover:text-accent transition-colors">{sub}</a>
+                      ))}
+                    </div>
+                  </li>
                 ))}
               </ul>
             </div>
