@@ -47,11 +47,11 @@
 
 /* LIGHT MODE */
 :root {
-  --background: 40 20% 97%; /* Cream/Paper */
-  --foreground: 20 14% 10%; /* Soft Black */
+  --background: 0 0% 100%; /* Pure White */
+  --foreground: 0 0% 0%; /* Pure Black */
   
-  --card: 40 20% 97%; 
-  --card-foreground: 20 14% 10%;
+  --card: 0 0% 100%; 
+  --card-foreground: 0 0% 0%;
   
   --popover: 40 20% 97%;
   --popover-foreground: 20 14% 10%;

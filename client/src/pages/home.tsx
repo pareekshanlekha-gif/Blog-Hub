@@ -218,6 +218,42 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Newsletter Section */}
+        <section className="py-24 bg-primary text-primary-foreground relative overflow-hidden">
+          <div className="container mx-auto px-6 relative z-10">
+            <div className="flex flex-col md:flex-row items-center gap-12">
+              <div className="flex-1">
+                <img 
+                  src="https://blog.google/static/blogv2/images/newsletter-homepage-woman-couch.svg?version=pr20260203-1735" 
+                  alt="Newsletter" 
+                  className="w-full max-w-md mx-auto"
+                />
+              </div>
+              <div className="flex-1 text-left">
+                <h2 className="text-4xl md:text-5xl font-serif mb-8 leading-tight">
+                  Get the latest news from MSwot in your inbox.
+                </h2>
+                <form className="flex w-full max-w-md" onSubmit={(e) => e.preventDefault()}>
+                  <input 
+                    type="email" 
+                    placeholder="Your email address" 
+                    className="flex-1 px-6 py-4 bg-white text-black border-none rounded-l-sm focus:outline-none"
+                    required
+                    data-testid="newsletter-input"
+                  />
+                  <button 
+                    type="submit" 
+                    className="px-8 py-4 bg-accent text-white font-bold hover:bg-accent/90 transition-colors rounded-r-sm whitespace-nowrap"
+                    data-testid="newsletter-submit"
+                  >
+                    Subscribe
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Blog Section */}
         <section className="py-24 bg-secondary/30">
           <div className="container mx-auto px-6">
@@ -275,112 +311,69 @@ export default function Home() {
             </div>
           </div>
         </section>
-
-        {/* Newsletter Section */}
-        <section className="py-24 bg-primary text-primary-foreground relative overflow-hidden">
-          <div className="container mx-auto px-6 relative z-10 text-center">
-            <span className="inline-block mb-6 text-xs font-bold tracking-[0.2em] uppercase opacity-70">
-              The Weekly Digest
-            </span>
-            <h2 className="text-4xl md:text-6xl font-serif mb-8 max-w-3xl mx-auto leading-tight">
-              Stories worth reading, delivered to your inbox.
-            </h2>
-            <p className="text-lg text-primary-foreground/80 mb-10 max-w-xl mx-auto font-light">
-              Join 15,000+ readers. No spam, just high-quality essays on design, culture, and slow living.
-            </p>
-
-            <form className="max-w-md mx-auto flex flex-col md:flex-row gap-4" onSubmit={(e) => e.preventDefault()}>
-              <input 
-                type="email" 
-                placeholder="Your email address" 
-                className="flex-1 px-6 py-4 bg-primary-foreground/10 border border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/40 rounded-sm focus:outline-none focus:ring-1 focus:ring-primary-foreground/50 transition-all"
-                required
-                data-testid="newsletter-input"
-              />
-              <button 
-                type="submit" 
-                className="px-8 py-4 bg-accent text-white font-medium hover:bg-accent/90 transition-colors rounded-sm shadow-lg hover:shadow-xl"
-                data-testid="newsletter-submit"
-              >
-                Subscribe
-              </button>
-            </form>
-          </div>
-          
-          {/* Background Pattern */}
-          <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
-             <div className="absolute right-0 top-0 w-[500px] h-[500px] bg-white rounded-full blur-[120px] transform translate-x-1/2 -translate-y-1/2"></div>
-             <div className="absolute left-0 bottom-0 w-[300px] h-[300px] bg-accent rounded-full blur-[100px] transform -translate-x-1/3 translate-y-1/3"></div>
-          </div>
-        </section>
       </main>
 
       {/* Footer */}
-      <footer className="bg-background border-t border-border pt-20 pb-10">
+      <footer className="bg-black text-white py-16">
         <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-            <div className="md:col-span-1">
-              <Link href="/" className="text-2xl font-serif font-bold tracking-tight block mb-6">
-                Editorial.
-              </Link>
-              <p className="text-muted-foreground text-sm leading-relaxed max-w-xs">
-                A digital publication dedicated to the art of mindful living and creative work.
-              </p>
-            </div>
-            
-            <div className="md:col-span-1">
-              <h4 className="font-bold text-sm uppercase tracking-widest mb-6">Explore</h4>
-              <ul className="space-y-4 text-sm text-muted-foreground">
-                {NAV_LINKS.map(link => (
-                  <li key={link.label} className="group">
-                    <a href={link.href} className="hover:text-foreground transition-colors font-medium">{link.label}</a>
-                    <div className="ml-4 mt-2 space-y-2 border-l border-border pl-4">
-                      {link.submenu?.map(sub => (
-                        <a key={sub} href="#" className="block text-[10px] hover:text-accent transition-colors">{sub}</a>
-                      ))}
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            
-            <div className="md:col-span-1">
-              <h4 className="font-bold text-sm uppercase tracking-widest mb-6">Company</h4>
-              <ul className="space-y-4 text-sm text-muted-foreground">
-                <li><a href="#" className="hover:text-foreground transition-colors">About Us</a></li>
-                <li><a href="#" className="hover:text-foreground transition-colors">Careers</a></li>
-                <li><a href="#" className="hover:text-foreground transition-colors">Contact</a></li>
-                <li><a href="#" className="hover:text-foreground transition-colors">Privacy Policy</a></li>
-              </ul>
-            </div>
-            
-            <div className="md:col-span-1">
-              <h4 className="font-bold text-sm uppercase tracking-widest mb-6">Connect</h4>
-              <div className="flex space-x-4">
-                <a href="#" className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-foreground hover:bg-accent hover:text-white transition-all group">
-                  <Twitter className="w-4 h-4" />
-                </a>
-                <a href="#" className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-foreground hover:bg-accent hover:text-white transition-all group">
-                  <Instagram className="w-4 h-4" />
-                </a>
-                <a href="#" className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-foreground hover:bg-accent hover:text-white transition-all group">
-                  <Linkedin className="w-4 h-4" />
-                </a>
-              </div>
+          {/* Layer 1: Company Name */}
+          <div className="text-center mb-12">
+            <Link href="/" className="text-4xl font-serif font-bold tracking-tight">
+              MSWOT.
+            </Link>
+          </div>
+
+          <div className="border-t border-white/20 my-12"></div>
+
+          {/* Layer 2: Topics Menu */}
+          <div className="mb-12">
+            <h4 className="text-center text-xs font-bold uppercase tracking-[0.3em] mb-10 opacity-50">Topics</h4>
+            <div className="flex flex-wrap justify-center gap-x-12 gap-y-8">
+              {NAV_LINKS.map(link => (
+                <div key={link.label} className="text-center">
+                  <a href={link.href} className="text-sm font-bold hover:text-accent transition-colors block mb-3">
+                    {link.label}
+                  </a>
+                  <div className="flex flex-wrap justify-center gap-x-4 opacity-60">
+                    {link.submenu?.map(sub => (
+                      <a key={sub} href="#" className="text-[10px] hover:text-white transition-colors">{sub}</a>
+                    ))}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
-          
-          <div className="border-t border-border pt-10 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-xs text-muted-foreground">
-              © 2024 Editorial Publishing. All rights reserved.
-            </p>
-            <div className="flex space-x-6 text-xs text-muted-foreground">
-              <a href="#" className="hover:text-foreground">Terms</a>
-              <a href="#" className="hover:text-foreground">Sitemap</a>
+
+          <div className="border-t border-white/20 my-12"></div>
+
+          {/* Layer 3: Company Horizontal & Socials */}
+          <div className="flex flex-col md:flex-row justify-between items-center gap-8">
+            <div className="flex flex-wrap justify-center gap-8 text-xs font-medium opacity-70">
+              <a href="#" className="hover:text-white transition-colors">About Us</a>
+              <a href="#" className="hover:text-white transition-colors">Careers</a>
+              <a href="#" className="hover:text-white transition-colors">Contact</a>
+              <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
+              <a href="#" className="hover:text-white transition-colors">Terms</a>
+            </div>
+            <div className="flex space-x-6">
+              <a href="#" className="text-white/60 hover:text-accent transition-colors">
+                <Twitter className="w-5 h-5" />
+              </a>
+              <a href="#" className="text-white/60 hover:text-accent transition-colors">
+                <Instagram className="w-5 h-5" />
+              </a>
+              <a href="#" className="text-white/60 hover:text-accent transition-colors">
+                <Linkedin className="w-5 h-5" />
+              </a>
             </div>
           </div>
         </div>
       </footer>
+
+      {/* 2nd Footer */}
+      <div className="bg-black text-white border-t border-white py-6 text-center">
+        <p className="text-sm font-medium opacity-50">Powered by : MSWOT, 2026.</p>
+      </div>
     </div>
   );
 }
