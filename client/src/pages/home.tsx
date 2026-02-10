@@ -303,33 +303,35 @@ export default function Home() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
               {filteredPosts.map((post) => (
-                <article key={post.id} className="group bg-white border border-[#dadce0] rounded-[8px] overflow-hidden transition-all duration-300 hover:shadow-lg cursor-pointer" data-testid={`blog-card-${post.id}`}>
-                  <div className="aspect-[4/3] overflow-hidden bg-muted">
-                    <img 
-                      src={post.image} 
-                      alt={post.title} 
-                      className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
-                    />
-                  </div>
-                  <div className="p-6">
-                    <div className="flex flex-wrap gap-2 mb-3">
-                      {post.category.map(cat => (
-                        <span key={cat} className="text-accent text-[10px] font-bold tracking-widest uppercase">
-                          {cat}
-                        </span>
-                      ))}
+                <Link key={post.id} href={`/blog/${post.id}`}>
+                  <article className="group bg-white border border-[#dadce0] rounded-[8px] overflow-hidden transition-all duration-300 hover:shadow-lg cursor-pointer h-full" data-testid={`blog-card-${post.id}`}>
+                    <div className="aspect-[4/3] overflow-hidden bg-muted">
+                      <img 
+                        src={post.image} 
+                        alt={post.title} 
+                        className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
+                      />
                     </div>
-                    <h3 className={`${post.bigTitle ? 'text-2xl md:text-3xl' : 'text-lg md:text-xl'} font-serif leading-tight mb-3 group-hover:text-primary transition-colors`}>
-                      {post.title}
-                    </h3>
-                    <p className="text-muted-foreground text-sm line-clamp-2 mb-4 leading-relaxed">
-                      {post.excerpt}
-                    </p>
-                    <div className="text-xs text-muted-foreground/60 font-mono">
-                      {post.date} • {post.readTime}
+                    <div className="p-6">
+                      <div className="flex flex-wrap gap-2 mb-3">
+                        {post.category.map(cat => (
+                          <span key={cat} className="text-accent text-[10px] font-bold tracking-widest uppercase">
+                            {cat}
+                          </span>
+                        ))}
+                      </div>
+                      <h3 className={`${post.bigTitle ? 'text-2xl md:text-3xl' : 'text-lg md:text-xl'} font-serif leading-tight mb-3 group-hover:text-primary transition-colors`}>
+                        {post.title}
+                      </h3>
+                      <p className="text-muted-foreground text-sm line-clamp-2 mb-4 leading-relaxed">
+                        {post.excerpt}
+                      </p>
+                      <div className="text-xs text-muted-foreground/60 font-mono">
+                        {post.date} • {post.readTime}
+                      </div>
                     </div>
-                  </div>
-                </article>
+                  </article>
+                </Link>
               ))}
             </div>
           </div>
