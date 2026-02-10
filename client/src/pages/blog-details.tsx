@@ -1,7 +1,16 @@
 import { Link, useRoute } from "wouter";
 import { motion } from "framer-motion";
-import { ArrowLeft, Twitter, Instagram, Linkedin, Share2, Bookmark } from "lucide-react";
+import { ArrowLeft, Twitter, Instagram, Linkedin, Share2, Bookmark, Cpu, Zap, MessageSquare, Search } from "lucide-react";
 import { useEffect, useState } from "react";
+
+const NAV_LINKS = [
+  { label: "AI Tools", href: "#", submenu: ["SEO", "AI", "Automation", "Generative Tools"] },
+  { label: "Platforms", href: "#", submenu: ["Facebook", "Instagram", "Shopping", "Google Ads"] },
+  { label: "SEO", href: "#", submenu: ["AEO", "AIO", "Content Marketing", "GEO"] },
+  { label: "Psychology", href: "#", submenu: ["B2B", "B2C", "Ecommerce"] },
+  { label: "Branding", href: "#", submenu: ["B2B", "B2C"] },
+  { label: "Updates", href: "#", submenu: ["Algorithms", "Content", "Media"] },
+];
 
 const BLOG_CONTENT = {
   title: "The Art of Slow Living in a Fast World: A Guide to Modern Mindfulness",
@@ -26,36 +35,60 @@ const BLOG_CONTENT = {
 export default function BlogDetails() {
   const [, params] = useRoute("/blog/:id");
   const [activeId, setActiveId] = useState("intro");
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveId(entry.target.id);
-          }
-        });
-      },
-      { rootMargin: "-20% 0% -35% 0%" }
-    );
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+      
+      const sections = document.querySelectorAll("section[id]");
+      let current = "intro";
+      sections.forEach((section) => {
+        const sectionTop = (section as HTMLElement).offsetTop;
+        if (window.scrollY >= sectionTop - 150) {
+          current = section.id;
+        }
+      });
+      setActiveId(current);
+    };
 
-    const sections = document.querySelectorAll("section[id]");
-    sections.forEach((section) => observer.observe(section));
-
-    return () => sections.forEach((section) => observer.unobserve(section));
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <div className="min-h-screen bg-white font-sans selection:bg-black selection:text-white">
-      {/* Navigation Header */}
-      <header className="sticky top-0 z-50 w-full border-b border-gray-100 bg-white/80 backdrop-blur-md">
-        <div className="container mx-auto px-6 h-16 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2 text-sm font-bold uppercase tracking-widest hover:text-accent transition-colors">
-            <ArrowLeft className="w-4 h-4" /> Back to home
+      {/* Header */}
+      <header className={`sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-md transition-shadow duration-300 ${scrolled ? 'shadow-[0_3px_5px_0_rgba(0,0,0,.16),0_3px_5px_0_rgba(0,0,0,.23)]' : ''}`}>
+        <div className="container mx-auto px-6 h-20 flex items-center justify-between">
+          <Link href="/" className="text-3xl font-serif font-bold tracking-tight hover:opacity-80 transition-opacity">
+            Editorial.
           </Link>
-          <div className="flex items-center gap-4">
-            <button className="p-2 hover:bg-gray-50 rounded-full transition-colors"><Bookmark className="w-4 h-4" /></button>
-            <button className="p-2 hover:bg-gray-50 rounded-full transition-colors"><Share2 className="w-4 h-4" /></button>
+
+          <div className="hidden md:flex items-center space-x-8">
+            <div className="flex space-x-8">
+              {NAV_LINKS.map((link) => (
+                <div key={link.label} className="relative group">
+                  <a href={link.href} className="text-sm font-medium tracking-wide hover:text-accent transition-colors flex items-center gap-1">
+                    {link.label}
+                    <span className="text-[10px] opacity-50 group-hover:rotate-180 transition-transform duration-300">▼</span>
+                  </a>
+                  <div className="absolute top-full right-0 pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 translate-y-2 group-hover:translate-y-0">
+                    <div className="bg-white border border-border shadow-xl py-4 w-48 rounded-sm">
+                      {link.submenu?.map((item) => (
+                        <a key={item} href="#" className="block px-6 py-2 text-xs font-medium hover:bg-secondary hover:text-accent transition-colors">
+                          {item}
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="h-4 w-px bg-border mx-2"></div>
+            <button className="p-2 hover:bg-secondary rounded-full transition-colors">
+              <Search className="w-4 h-4" />
+            </button>
           </div>
         </div>
       </header>
@@ -86,8 +119,32 @@ export default function BlogDetails() {
         {/* Layout Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 relative">
           
-          {/* Left: Table of Contents */}
+          {/* Left: AI Summarizers & Table of Contents */}
           <aside className="hidden lg:block lg:col-span-3 sticky top-32 h-fit">
+            <div className="mb-12">
+              <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400 mb-6">AI Summary</h4>
+              <div className="flex flex-col gap-3">
+                <a href="https://chatgpt.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-3 rounded-lg border border-border hover:bg-secondary transition-colors group">
+                  <div className="w-8 h-8 rounded bg-emerald-100 flex items-center justify-center text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-colors">
+                    <MessageSquare className="w-4 h-4" />
+                  </div>
+                  <span className="text-xs font-bold">ChatGPT</span>
+                </a>
+                <a href="https://grok.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-3 rounded-lg border border-border hover:bg-secondary transition-colors group">
+                  <div className="w-8 h-8 rounded bg-gray-100 flex items-center justify-center text-black group-hover:bg-black group-hover:text-white transition-colors">
+                    <Cpu className="w-4 h-4" />
+                  </div>
+                  <span className="text-xs font-bold">Grok AI</span>
+                </a>
+                <a href="https://claude.ai" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-3 rounded-lg border border-border hover:bg-secondary transition-colors group">
+                  <div className="w-8 h-8 rounded bg-orange-100 flex items-center justify-center text-orange-600 group-hover:bg-orange-600 group-hover:text-white transition-colors">
+                    <Zap className="w-4 h-4" />
+                  </div>
+                  <span className="text-xs font-bold">Claude</span>
+                </a>
+              </div>
+            </div>
+
             <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400 mb-8">Table of Contents</h4>
             <nav className="flex flex-col gap-4 border-l border-gray-100">
               {BLOG_CONTENT.toc.map((item) => (
@@ -184,9 +241,67 @@ export default function BlogDetails() {
               </div>
             </div>
           </aside>
-
         </div>
       </main>
+
+      {/* Footer */}
+      <footer className="bg-black text-white pt-24 pb-16">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-24">
+            <Link href="/" className="text-6xl font-serif font-bold tracking-tight">
+              MSWOT.
+            </Link>
+          </div>
+
+          <div className="mb-24 px-4">
+            <h4 className="text-center text-xs font-bold uppercase tracking-[0.4em] mb-16 opacity-40">Topics</h4>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-12 lg:gap-8">
+              {NAV_LINKS.map(link => (
+                <div key={link.label} className="text-left md:text-center">
+                  <a href={link.href} className="text-xl font-bold hover:text-accent transition-colors block mb-6">
+                    {link.label}
+                  </a>
+                  <div className="flex flex-col md:items-center gap-y-3 opacity-50">
+                    {link.submenu?.map(sub => (
+                      <a key={sub} href="#" className="text-xs hover:text-white transition-colors uppercase tracking-[0.15em] font-medium">{sub}</a>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="flex flex-col md:flex-row justify-between items-center gap-10 pt-16 px-4">
+            <div className="flex flex-wrap justify-center md:justify-start gap-x-12 gap-y-6 text-sm font-semibold tracking-wide uppercase opacity-60">
+              <a href="#" className="hover:text-white transition-colors">About Us</a>
+              <a href="#" className="hover:text-white transition-colors">Careers</a>
+              <a href="#" className="hover:text-white transition-colors">Contact</a>
+              <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
+              <a href="#" className="hover:text-white transition-colors">Terms</a>
+            </div>
+            <div className="flex items-center space-x-8">
+              <a href="#" className="text-white/50 hover:text-white transition-all transform hover:scale-110">
+                <Twitter className="w-6 h-6" />
+              </a>
+              <a href="#" className="text-white/50 hover:text-white transition-all transform hover:scale-110">
+                <Instagram className="w-6 h-6" />
+              </a>
+              <a href="#" className="text-white/50 hover:text-white transition-all transform hover:scale-110">
+                <Linkedin className="w-6 h-6" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+      {/* 2nd Footer */}
+      <div className="bg-black text-white py-12">
+        <div className="container mx-auto px-10">
+          <div className="border-t border-white/20 pt-10 text-center">
+            <p className="text-[11px] font-bold tracking-[0.25em] opacity-30 uppercase">Powered by : MSWOT, 2026.</p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
