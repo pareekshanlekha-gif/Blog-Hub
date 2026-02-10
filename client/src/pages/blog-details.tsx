@@ -122,25 +122,33 @@ export default function BlogDetails() {
           {/* Left: AI Summarizers & Table of Contents */}
           <aside className="hidden lg:block lg:col-span-3 sticky top-32 h-fit">
             <div className="mb-12">
-              <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400 mb-6">AI Summary</h4>
-              <div className="flex flex-col gap-3">
-                <a href="https://chatgpt.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-3 rounded-lg border border-border hover:bg-secondary transition-colors group">
-                  <div className="w-8 h-8 rounded bg-emerald-100 flex items-center justify-center text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-colors">
-                    <MessageSquare className="w-4 h-4" />
-                  </div>
-                  <span className="text-xs font-bold">ChatGPT</span>
+              <div className="flex items-center gap-4 mb-8">
+                <a 
+                  href={`https://chatgpt.com/?q=Summarize%20${encodeURIComponent(window.location.href)}`} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="w-10 h-10 rounded-lg border border-border flex items-center justify-center text-emerald-600 hover:bg-emerald-600 hover:text-white transition-all transform hover:scale-110 group relative"
+                  title="Summarize with ChatGPT"
+                >
+                  <MessageSquare className="w-5 h-5" />
                 </a>
-                <a href="https://grok.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-3 rounded-lg border border-border hover:bg-secondary transition-colors group">
-                  <div className="w-8 h-8 rounded bg-gray-100 flex items-center justify-center text-black group-hover:bg-black group-hover:text-white transition-colors">
-                    <Cpu className="w-4 h-4" />
-                  </div>
-                  <span className="text-xs font-bold">Grok AI</span>
+                <a 
+                  href={`https://grok.com/?q=Summarize%20${encodeURIComponent(window.location.href)}`} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="w-10 h-10 rounded-lg border border-border flex items-center justify-center text-black hover:bg-black hover:text-white transition-all transform hover:scale-110 group relative"
+                  title="Summarize with Grok AI"
+                >
+                  <Cpu className="w-5 h-5" />
                 </a>
-                <a href="https://claude.ai" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-3 rounded-lg border border-border hover:bg-secondary transition-colors group">
-                  <div className="w-8 h-8 rounded bg-orange-100 flex items-center justify-center text-orange-600 group-hover:bg-orange-600 group-hover:text-white transition-colors">
-                    <Zap className="w-4 h-4" />
-                  </div>
-                  <span className="text-xs font-bold">Claude</span>
+                <a 
+                  href={`https://claude.ai/new?q=Summarize%20${encodeURIComponent(window.location.href)}`} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="w-10 h-10 rounded-lg border border-border flex items-center justify-center text-orange-600 hover:bg-orange-600 hover:text-white transition-all transform hover:scale-110 group relative"
+                  title="Summarize with Claude"
+                >
+                  <Zap className="w-5 h-5" />
                 </a>
               </div>
             </div>
@@ -216,7 +224,6 @@ export default function BlogDetails() {
                 <div className="w-16 h-16 rounded-full overflow-hidden mb-6">
                   <img src={BLOG_CONTENT.author.avatar} alt={BLOG_CONTENT.author.name} className="w-full h-full object-cover" />
                 </div>
-                <h4 className="text-sm font-bold uppercase tracking-widest mb-2">About the Author</h4>
                 <p className="text-sm font-bold mb-4">{BLOG_CONTENT.author.name}</p>
                 <p className="text-xs leading-relaxed text-gray-500 mb-6">
                   {BLOG_CONTENT.author.bio}

@@ -320,7 +320,7 @@ export default function Home() {
                           </span>
                         ))}
                       </div>
-                      <h3 className={`${post.bigTitle ? 'text-2xl md:text-3xl' : 'text-lg md:text-xl'} font-serif leading-tight mb-3 group-hover:text-primary transition-colors`}>
+                      <h3 className="text-xl md:text-2xl font-serif leading-tight mb-3 group-hover:text-primary transition-colors">
                         {post.title}
                       </h3>
                       <p className="text-muted-foreground text-sm line-clamp-2 mb-4 leading-relaxed">
@@ -339,25 +339,24 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-black text-white pt-24 pb-16">
+      <footer className="bg-black text-white pt-20 pb-12">
         <div className="container mx-auto px-6">
           {/* Layer 1: Company Name */}
-          <div className="text-center mb-24">
+          <div className="text-center mb-16">
             <Link href="/" className="text-6xl font-serif font-bold tracking-tight">
               MSWOT.
             </Link>
           </div>
 
           {/* Layer 2: Topics Menu */}
-          <div className="mb-24 px-4">
-            <h4 className="text-center text-xs font-bold uppercase tracking-[0.4em] mb-16 opacity-40">Topics</h4>
+          <div className="mb-16 px-4">
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-12 lg:gap-8">
               {NAV_LINKS.map(link => (
-                <div key={link.label} className="text-left md:text-center">
+                <div key={link.label} className="text-left">
                   <a href={link.href} className="text-xl font-bold hover:text-accent transition-colors block mb-6">
                     {link.label}
                   </a>
-                  <div className="flex flex-col md:items-center gap-y-3 opacity-50">
+                  <div className="flex flex-col items-start gap-y-3 opacity-50">
                     {link.submenu?.map(sub => (
                       <a key={sub} href="#" className="text-xs hover:text-white transition-colors uppercase tracking-[0.15em] font-medium">{sub}</a>
                     ))}
@@ -368,7 +367,7 @@ export default function Home() {
           </div>
 
           {/* Layer 3: Company Horizontal & Socials */}
-          <div className="flex flex-col md:flex-row justify-between items-center gap-10 pt-16 px-4">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-10 pt-12 px-4">
             <div className="flex flex-wrap justify-center md:justify-start gap-x-12 gap-y-6 text-sm font-semibold tracking-wide uppercase opacity-60">
               <a href="#" className="hover:text-white transition-colors">About Us</a>
               <a href="#" className="hover:text-white transition-colors">Careers</a>
