@@ -4,12 +4,12 @@ import { ArrowLeft, Twitter, Instagram, Linkedin, Share2, Bookmark, Cpu, Zap, Me
 import { useEffect, useState } from "react";
 
 const NAV_LINKS = [
-  { label: "AI Tools", href: "#", submenu: ["SEO", "AI", "Automation", "Generative Tools"] },
-  { label: "Platforms", href: "#", submenu: ["Facebook", "Instagram", "Shopping", "Google Ads"] },
-  { label: "SEO", href: "#", submenu: ["AEO", "AIO", "Content Marketing", "GEO"] },
-  { label: "Psychology", href: "#", submenu: ["B2B", "B2C", "Ecommerce"] },
-  { label: "Branding", href: "#", submenu: ["B2B", "B2C"] },
-  { label: "Updates", href: "#", submenu: ["Algorithms", "Content", "Media"] },
+  { label: "AI Tools", href: "/category/ai-tools", submenu: ["SEO", "AI", "Automation", "Generative Tools"] },
+  { label: "Platforms", href: "/category/platforms", submenu: ["Facebook", "Instagram", "Shopping", "Google Ads"] },
+  { label: "SEO", href: "/category/seo", submenu: ["AEO", "AIO", "Content Marketing", "GEO"] },
+  { label: "Psychology", href: "/category/psychology", submenu: ["B2B", "B2C", "Ecommerce"] },
+  { label: "Branding", href: "/category/branding", submenu: ["B2B", "B2C"] },
+  { label: "Updates", href: "/category/updates", submenu: ["Algorithms", "Content", "Media"] },
 ];
 
 const BLOG_CONTENT = {
@@ -69,16 +69,16 @@ export default function BlogDetails() {
             <div className="flex space-x-8">
               {NAV_LINKS.map((link) => (
                 <div key={link.label} className="relative group">
-                  <a href={link.href} className="text-sm font-medium tracking-wide hover:text-accent transition-colors flex items-center gap-1">
+                  <Link href={link.href} className="text-sm font-medium tracking-wide hover:text-accent transition-colors flex items-center gap-1">
                     {link.label}
                     <span className="text-[10px] opacity-50 group-hover:rotate-180 transition-transform duration-300">▼</span>
-                  </a>
+                  </Link>
                   <div className="absolute top-full right-0 pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 translate-y-2 group-hover:translate-y-0">
                     <div className="bg-white border border-border shadow-xl py-4 w-48 rounded-sm">
                       {link.submenu?.map((item) => (
-                        <a key={item} href="#" className="block px-6 py-2 text-xs font-medium hover:bg-secondary hover:text-accent transition-colors">
+                        <Link key={item} href={`/category/${item.toLowerCase().replace(' ', '-')}`} className="block px-6 py-2 text-xs font-medium text-black hover:bg-secondary hover:text-accent transition-colors">
                           {item}
-                        </a>
+                        </Link>
                       ))}
                     </div>
                   </div>
@@ -252,25 +252,28 @@ export default function BlogDetails() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-black text-white pt-24 pb-16">
+      <footer className="bg-black text-white pt-20 pb-12">
         <div className="container mx-auto px-6">
-          <div className="text-center mb-24">
+          {/* Layer 1: Company Name */}
+          <div className="text-center mb-16">
             <Link href="/" className="text-6xl font-serif font-bold tracking-tight">
               MSWOT.
             </Link>
           </div>
 
-          <div className="mb-24 px-4">
-            <h4 className="text-center text-xs font-bold uppercase tracking-[0.4em] mb-16 opacity-40">Topics</h4>
+          {/* Layer 2: Menus */}
+          <div className="mb-16 px-4">
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-12 lg:gap-8">
               {NAV_LINKS.map(link => (
-                <div key={link.label} className="text-left md:text-center">
-                  <a href={link.href} className="text-xl font-bold hover:text-accent transition-colors block mb-6">
+                <div key={link.label} className="text-left">
+                  <Link href={link.href} className="text-xl font-bold hover:text-accent transition-colors block mb-6">
                     {link.label}
-                  </a>
-                  <div className="flex flex-col md:items-center gap-y-3 opacity-50">
+                  </Link>
+                  <div className="flex flex-col items-start gap-y-3 opacity-50">
                     {link.submenu?.map(sub => (
-                      <a key={sub} href="#" className="text-xs hover:text-white transition-colors uppercase tracking-[0.15em] font-medium">{sub}</a>
+                      <Link key={sub} href={`/category/${sub.toLowerCase().replace(' ', '-')}`} className="text-xs hover:text-white transition-colors uppercase tracking-[0.15em] font-medium">
+                        {sub}
+                      </Link>
                     ))}
                   </div>
                 </div>
@@ -278,7 +281,8 @@ export default function BlogDetails() {
             </div>
           </div>
 
-          <div className="flex flex-col md:flex-row justify-between items-center gap-10 pt-16 px-4">
+          {/* Layer 3: Company Horizontal & Socials */}
+          <div className="flex flex-col md:flex-row justify-between items-center gap-10 pt-12 px-4 border-t border-white/10">
             <div className="flex flex-wrap justify-center md:justify-start gap-x-12 gap-y-6 text-sm font-semibold tracking-wide uppercase opacity-60">
               <a href="#" className="hover:text-white transition-colors">About Us</a>
               <a href="#" className="hover:text-white transition-colors">Careers</a>
@@ -298,17 +302,11 @@ export default function BlogDetails() {
               </a>
             </div>
           </div>
-        </div>
-      </footer>
-
-      {/* 2nd Footer */}
-      <div className="bg-black text-white py-12">
-        <div className="container mx-auto px-10">
-          <div className="border-t border-white/20 pt-10 text-center">
-            <p className="text-[11px] font-bold tracking-[0.25em] opacity-30 uppercase">Powered by : MSWOT, 2026.</p>
+          <div className="border-t border-white/20 pt-10 mt-12 text-center opacity-30 text-[11px] uppercase tracking-[0.25em]">
+            Powered by : MSWOT, 2026.
           </div>
         </div>
-      </div>
+      </footer>
     </div>
   );
 }

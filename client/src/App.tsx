@@ -5,12 +5,14 @@ import { Toaster } from "@/components/ui/toaster";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/home";
 import BlogDetails from "@/pages/blog-details";
+import CategoryPage from "@/pages/category";
 
 function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/blog/:id" component={BlogDetails} />
+      <Route path="/category/:slug" component={CategoryPage} />
       <Route component={NotFound} />
     </Switch>
   );

@@ -9,12 +9,12 @@ import blogTravel from "../assets/blog-travel.png";
 import newsletterAlt from "../assets/newsletter-alt.png";
 
 const NAV_LINKS = [
-  { label: "AI Tools", href: "#", submenu: ["SEO", "AI", "Automation", "Generative Tools"] },
-  { label: "Platforms", href: "#", submenu: ["Facebook", "Instagram", "Shopping", "Google Ads"] },
-  { label: "SEO", href: "#", submenu: ["AEO", "AIO", "Content Marketing", "GEO"] },
-  { label: "Psychology", href: "#", submenu: ["B2B", "B2C", "Ecommerce"] },
-  { label: "Branding", href: "#", submenu: ["B2B", "B2C"] },
-  { label: "Updates", href: "#", submenu: ["Algorithms", "Content", "Media"] },
+  { label: "AI Tools", href: "/category/ai-tools", submenu: ["SEO", "AI", "Automation", "Generative Tools"] },
+  { label: "Platforms", href: "/category/platforms", submenu: ["Facebook", "Instagram", "Shopping", "Google Ads"] },
+  { label: "SEO", href: "/category/seo", submenu: ["AEO", "AIO", "Content Marketing", "GEO"] },
+  { label: "Psychology", href: "/category/psychology", submenu: ["B2B", "B2C", "Ecommerce"] },
+  { label: "Branding", href: "/category/branding", submenu: ["B2B", "B2C"] },
+  { label: "Updates", href: "/category/updates", submenu: ["Algorithms", "Content", "Media"] },
 ];
 
 const BLOG_POSTS = [
@@ -122,9 +122,9 @@ export default function Home() {
                   <div className="absolute top-full right-0 pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 translate-y-2 group-hover:translate-y-0">
                     <div className="bg-white border border-border shadow-xl py-4 w-48 rounded-sm">
                       {link.submenu?.map((item) => (
-                        <a key={item} href="#" className="block px-6 py-2 text-xs font-medium hover:bg-secondary hover:text-accent transition-colors">
+                        <Link key={item} href={`/category/${item.toLowerCase().replace(' ', '-')}`} className="block px-6 py-2 text-xs font-medium hover:bg-secondary hover:text-accent transition-colors">
                           {item}
-                        </a>
+                        </Link>
                       ))}
                     </div>
                   </div>
@@ -353,12 +353,12 @@ export default function Home() {
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-12 lg:gap-8">
               {NAV_LINKS.map(link => (
                 <div key={link.label} className="text-left">
-                  <a href={link.href} className="text-xl font-bold hover:text-accent transition-colors block mb-6">
+                  <Link href={link.href} className="text-xl font-bold hover:text-accent transition-colors block mb-6">
                     {link.label}
-                  </a>
+                  </Link>
                   <div className="flex flex-col items-start gap-y-3 opacity-50">
                     {link.submenu?.map(sub => (
-                      <a key={sub} href="#" className="text-xs hover:text-white transition-colors uppercase tracking-[0.15em] font-medium">{sub}</a>
+                      <Link key={sub} href={`/category/${sub.toLowerCase().replace(' ', '-')}`} className="text-xs hover:text-white transition-colors uppercase tracking-[0.15em] font-medium">{sub}</Link>
                     ))}
                   </div>
                 </div>
