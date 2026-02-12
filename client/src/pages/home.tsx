@@ -369,11 +369,12 @@ export default function Home() {
           {/* Layer 3: Company Horizontal & Socials */}
           <div className="flex flex-col md:flex-row justify-between items-center gap-10 pt-12 px-4">
             <div className="flex flex-wrap justify-center md:justify-start gap-x-12 gap-y-6 text-sm font-semibold tracking-wide uppercase opacity-60">
-              <a href="#" className="hover:text-white transition-colors">About Us</a>
-              <a href="#" className="hover:text-white transition-colors">Careers</a>
-              <a href="#" className="hover:text-white transition-colors">Contact</a>
-              <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-              <a href="#" className="hover:text-white transition-colors">Terms</a>
+              <Link href="/about" className="hover:text-white transition-colors">About Us</Link>
+              <Link href="/careers" className="hover:text-white transition-colors">Careers</Link>
+              <Link href="/contact" className="hover:text-white transition-colors">Contact</Link>
+              <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
+              <Link href="/terms" className="hover:text-white transition-colors">Terms</Link>
+              <Link href="/auth" className="hover:text-white transition-colors">Login</Link>
             </div>
             <div className="flex items-center space-x-8">
               <a href="#" className="text-white/50 hover:text-white transition-all transform hover:scale-110">

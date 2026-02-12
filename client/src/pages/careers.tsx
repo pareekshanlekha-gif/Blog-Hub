@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "wouter";
-import { Twitter, Instagram, Linkedin, Search, Send, Mail, MapPin, Phone } from "lucide-react";
+import { Twitter, Instagram, Linkedin, Search, Briefcase, GraduationCap, Users } from "lucide-react";
 import { useState, useEffect } from "react";
 
 const NAV_LINKS = [
@@ -12,7 +12,7 @@ const NAV_LINKS = [
   { label: "Updates", href: "/updates", submenu: ["Algorithms", "Content", "Media"] },
 ];
 
-export default function ContactPage() {
+export default function CareersPage() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -56,104 +56,72 @@ export default function ContactPage() {
       </header>
 
       <main>
-        {/* Hero Section */}
-        <section className="py-24 bg-gray-50 border-b border-border">
+        <section className="py-24 bg-black text-white">
           <div className="container mx-auto px-6">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               className="max-w-4xl"
             >
-              <h1 className="text-6xl md:text-8xl font-serif font-bold leading-tight mb-8 text-black">
-                Let's Start a <br/> Conversation.
+              <h1 className="text-6xl md:text-8xl font-serif font-bold leading-tight mb-8">
+                Build the Future of <br/> Editorial.
               </h1>
-              <p className="text-xl text-gray-500 font-light max-w-2xl leading-relaxed">
-                Whether you're looking for editorial partnership, media inquiries, or just want to share a story - our doors are always open.
+              <p className="text-xl text-gray-400 font-light max-w-2xl leading-relaxed">
+                We are a collective of thinkers, designers, and creators redefining how knowledge is shared. Join us on our mission to clarify the complex.
               </p>
             </motion.div>
           </div>
         </section>
 
-        {/* Contact Grid */}
         <section className="py-24 bg-white">
           <div className="container mx-auto px-6">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-24">
-              {/* Form */}
-              <div className="lg:col-span-7">
-                <form className="space-y-8" onSubmit={(e) => e.preventDefault()}>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div className="space-y-2">
-                      <label className="text-[10px] font-bold uppercase tracking-widest text-gray-400">Full Name</label>
-                      <input type="text" placeholder="John Doe" className="w-full px-0 py-4 bg-transparent border-b border-border focus:border-black focus:outline-none transition-colors" />
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-[10px] font-bold uppercase tracking-widest text-gray-400">Email Address</label>
-                      <input type="email" placeholder="john@example.com" className="w-full px-0 py-4 bg-transparent border-b border-border focus:border-black focus:outline-none transition-colors" />
-                    </div>
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-[10px] font-bold uppercase tracking-widest text-gray-400">Subject</label>
-                    <select className="w-full px-0 py-4 bg-transparent border-b border-border focus:border-black focus:outline-none transition-colors">
-                      <option>General Inquiry</option>
-                      <option>Partnership</option>
-                      <option>Media Kit</option>
-                      <option>Advertising</option>
-                    </select>
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-[10px] font-bold uppercase tracking-widest text-gray-400">Message</label>
-                    <textarea rows={6} placeholder="Tell us more about your inquiry..." className="w-full px-0 py-4 bg-transparent border-b border-border focus:border-black focus:outline-none transition-colors resize-none"></textarea>
-                  </div>
-                  <button className="flex items-center gap-4 px-12 py-5 bg-black text-white font-bold uppercase tracking-widest hover:bg-accent transition-all rounded-sm group">
-                    Send Message <Send className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                  </button>
-                </form>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-24">
+              <div className="space-y-4">
+                <Briefcase className="w-8 h-8 text-accent" />
+                <h3 className="text-xl font-serif font-bold">Remote-First</h3>
+                <p className="text-gray-500 text-sm leading-relaxed">Work from anywhere in the world. We believe talent isn't bound by geography.</p>
               </div>
+              <div className="space-y-4">
+                <GraduationCap className="w-8 h-8 text-accent" />
+                <h3 className="text-xl font-serif font-bold">Growth</h3>
+                <p className="text-gray-500 text-sm leading-relaxed">Annual learning budget and mentorship programs to help you reach your peak.</p>
+              </div>
+              <div className="space-y-4">
+                <Users className="w-8 h-8 text-accent" />
+                <h3 className="text-xl font-serif font-bold">Community</h3>
+                <p className="text-gray-500 text-sm leading-relaxed">Regular off-sites and a culture built on radical transparency and kindness.</p>
+              </div>
+            </div>
 
-              {/* Info */}
-              <div className="lg:col-span-5 space-y-12">
-                <div className="space-y-4">
-                  <h3 className="text-xl font-serif font-bold text-black">Inquiries</h3>
-                  <div className="space-y-2 text-gray-500">
-                    <div className="flex items-center gap-3">
-                      <Mail className="w-4 h-4 text-accent" />
-                      <a href="mailto:hello@mswot.com" className="hover:text-black transition-colors">hello@mswot.com</a>
+            <div className="space-y-12">
+              <h2 className="text-4xl font-serif font-bold">Open Positions</h2>
+              <div className="divide-y divide-border">
+                {[
+                  { title: "Senior AI Researcher", team: "Editorial", type: "Full-time" },
+                  { title: "Lead Product Designer", team: "Design", type: "Full-time" },
+                  { title: "Technical Content Strategist", team: "Marketing", type: "Contract" },
+                  { title: "Frontend Engineer (React)", team: "Engineering", type: "Full-time" }
+                ].map((job, i) => (
+                  <div key={i} className="py-8 flex flex-col md:flex-row md:items-center justify-between group cursor-pointer">
+                    <div>
+                      <h4 className="text-2xl font-serif font-bold group-hover:text-accent transition-colors">{job.title}</h4>
+                      <div className="flex gap-4 mt-2 text-xs font-bold uppercase tracking-widest text-gray-400">
+                        <span>{job.team}</span>
+                        <span>•</span>
+                        <span>{job.type}</span>
+                      </div>
                     </div>
-                    <div className="flex items-center gap-3">
-                      <Phone className="w-4 h-4 text-accent" />
-                      <span>+1 (555) 123-4567</span>
-                    </div>
+                    <button className="mt-6 md:mt-0 px-8 py-3 border border-black text-xs font-bold uppercase tracking-widest hover:bg-black hover:text-white transition-all">
+                      Apply Now
+                    </button>
                   </div>
-                </div>
-
-                <div className="space-y-4">
-                  <h3 className="text-xl font-serif font-bold text-black">Studio</h3>
-                  <div className="flex items-start gap-3 text-gray-500">
-                    <MapPin className="w-4 h-4 text-accent mt-1" />
-                    <p>
-                      123 Editorial Lane<br/>
-                      Design District<br/>
-                      New York, NY 10013
-                    </p>
-                  </div>
-                </div>
-
-                <div className="p-8 bg-black text-white rounded-2xl space-y-4">
-                  <h4 className="font-bold uppercase tracking-widest text-xs">Work with us</h4>
-                  <p className="text-gray-400 text-sm leading-relaxed">
-                    We're always looking for talented writers, designers, and researchers to join our collective.
-                  </p>
-                  <a href="#" className="inline-flex items-center gap-2 text-accent font-bold uppercase tracking-widest text-xs hover:gap-4 transition-all">
-                    View Careers <ArrowRight className="w-4 h-4" />
-                  </a>
-                </div>
+                ))}
               </div>
             </div>
           </div>
         </section>
       </main>
 
-      {/* Footer (Same as homepage) */}
       <footer className="bg-black text-white pt-20 pb-12">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
@@ -180,16 +148,12 @@ export default function ContactPage() {
               <Link href="/contact" className="hover:text-white transition-colors">Contact</Link>
               <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
               <Link href="/terms" className="hover:text-white transition-colors">Terms</Link>
-              <Link href="/auth" className="hover:text-white transition-colors">Login</Link>
             </div>
             <div className="flex items-center space-x-8">
               <a href="#" className="text-white/50 hover:text-white transition-all transform hover:scale-110"><Twitter className="w-6 h-6" /></a>
               <a href="#" className="text-white/50 hover:text-white transition-all transform hover:scale-110"><Instagram className="w-6 h-6" /></a>
               <a href="#" className="text-white/50 hover:text-white transition-all transform hover:scale-110"><Linkedin className="w-6 h-6" /></a>
             </div>
-          </div>
-          <div className="border-t border-white/20 pt-10 mt-12 text-center opacity-30 text-[11px] uppercase tracking-[0.25em]">
-            Powered by : MSWOT, 2026.
           </div>
         </div>
       </footer>
