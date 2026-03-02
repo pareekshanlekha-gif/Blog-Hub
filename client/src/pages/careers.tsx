@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { Twitter, Instagram, Linkedin, Search, Briefcase, GraduationCap, Users } from "lucide-react";
 import { useState, useEffect } from "react";
+import logoImg from "../assets/logo.png";
 
 const NAV_LINKS = [
   { label: "AI Tools", href: "/ai-tools", submenu: ["SEO", "AI", "Automation", "Generative Tools"] },
@@ -26,7 +27,9 @@ export default function CareersPage() {
       {/* Header */}
       <header className={`sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-md transition-shadow duration-300 ${scrolled ? 'shadow-[0_3px_5px_0_rgba(0,0,0,.16),0_3px_5px_0_rgba(0,0,0,.23)]' : ''}`}>
         <div className="container mx-auto px-6 h-20 flex items-center justify-between">
-          <Link href="/" className="text-3xl font-serif font-bold tracking-tight hover:opacity-80 transition-opacity">Editorial.</Link>
+          <Link href="/" className="flex items-center hover:opacity-80 transition-opacity">
+            <img src={logoImg} alt="MSWOT Logo" className="h-10 w-auto object-contain" />
+          </Link>
           <div className="hidden md:flex items-center space-x-8">
             <div className="flex space-x-8">
               {NAV_LINKS.map((link) => (
@@ -124,8 +127,10 @@ export default function CareersPage() {
 
       <footer className="bg-black text-white pt-20 pb-12">
         <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <Link href="/" className="text-6xl font-serif font-bold tracking-tight">MSWOT.</Link>
+          <div className="flex justify-center mb-16">
+            <Link href="/" className="hover:opacity-80 transition-opacity">
+              <img src={logoImg} alt="MSWOT Logo" className="h-16 w-auto object-contain brightness-0 invert" />
+            </Link>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 mb-12">
             {NAV_LINKS.map(link => (

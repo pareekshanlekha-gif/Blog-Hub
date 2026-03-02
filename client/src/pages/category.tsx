@@ -3,6 +3,7 @@ import { Link, useRoute } from "wouter";
 import { motion } from "framer-motion";
 import { ArrowRight, Twitter, Instagram, Linkedin, Search } from "lucide-react";
 import blogCoffee from "../assets/blog-coffee.png";
+import logoImg from "../assets/logo.png";
 import blogTech from "../assets/blog-tech.png";
 import blogTravel from "../assets/blog-travel.png";
 
@@ -141,7 +142,9 @@ export default function CategoryPage() {
     <div className="min-h-screen bg-white font-sans selection:bg-black selection:text-white overflow-x-hidden">
       <header className={`sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-md transition-shadow duration-300 ${scrolled ? 'shadow-[0_3px_5px_0_rgba(0,0,0,.16),0_3px_5px_0_rgba(0,0,0,.23)]' : ''}`}>
         <div className="container mx-auto px-6 h-20 flex items-center justify-between">
-          <Link href="/" className="text-3xl font-serif font-bold tracking-tight hover:opacity-80 transition-opacity">Editorial.</Link>
+          <Link href="/" className="flex items-center hover:opacity-80 transition-opacity">
+            <img src={logoImg} alt="MSWOT Logo" className="h-10 w-auto object-contain" />
+          </Link>
           <div className="hidden md:flex items-center space-x-8">
             <div className="flex space-x-8">
               {NAV_LINKS.map((link) => (
@@ -252,8 +255,10 @@ export default function CategoryPage() {
 
       <footer className="bg-black text-white pt-24 pb-16 mt-32">
         <div className="container mx-auto px-6">
-          <div className="text-center mb-24">
-            <Link href="/" className="text-6xl font-serif font-bold tracking-tight hover:opacity-80 transition-opacity">MSWOT.</Link>
+          <div className="flex justify-center mb-24">
+            <Link href="/" className="hover:opacity-80 transition-opacity">
+              <img src={logoImg} alt="MSWOT Logo" className="h-20 w-auto object-contain brightness-0 invert" />
+            </Link>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-12 lg:gap-8 mb-20 px-4">
             {NAV_LINKS.map(link => (

@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { Twitter, Instagram, Linkedin, Search } from "lucide-react";
 import { useState, useEffect } from "react";
+import logoImg from "../assets/logo.png";
 
 const NAV_LINKS = [
   { label: "AI Tools", href: "/ai-tools", submenu: ["SEO", "AI", "Automation", "Generative Tools"] },
@@ -25,7 +26,9 @@ export default function TermsPage() {
     <div className="min-h-screen bg-white font-sans selection:bg-black selection:text-white overflow-x-hidden">
       <header className={`sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-md transition-shadow duration-300 ${scrolled ? 'shadow-[0_3px_5px_0_rgba(0,0,0,.16),0_3px_5px_0_rgba(0,0,0,.23)]' : ''}`}>
         <div className="container mx-auto px-6 h-20 flex items-center justify-between">
-          <Link href="/" className="text-3xl font-serif font-bold tracking-tight hover:opacity-80 transition-opacity">Editorial.</Link>
+          <Link href="/" className="flex items-center hover:opacity-80 transition-opacity">
+            <img src={logoImg} alt="MSWOT Logo" className="h-10 w-auto object-contain" />
+          </Link>
           <div className="hidden md:flex items-center space-x-8">
             <div className="flex space-x-8">
               {NAV_LINKS.map((link) => (
@@ -78,8 +81,10 @@ export default function TermsPage() {
 
       <footer className="bg-black text-white pt-20 pb-12">
         <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <Link href="/" className="text-6xl font-serif font-bold tracking-tight">MSWOT.</Link>
+          <div className="flex justify-center mb-16">
+            <Link href="/" className="hover:opacity-80 transition-opacity">
+              <img src={logoImg} alt="MSWOT Logo" className="h-16 w-auto object-contain brightness-0 invert" />
+            </Link>
           </div>
           <div className="flex flex-col md:flex-row justify-between items-center gap-10 pt-12 px-4 border-t border-white/10">
             <div className="flex flex-wrap justify-center md:justify-start gap-x-12 gap-y-6 text-sm font-semibold tracking-wide uppercase opacity-60">

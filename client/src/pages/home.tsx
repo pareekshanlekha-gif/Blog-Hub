@@ -7,6 +7,7 @@ import blogCoffee from "../assets/blog-coffee.png";
 import blogTech from "../assets/blog-tech.png";
 import blogTravel from "../assets/blog-travel.png";
 import newsletterAlt from "../assets/newsletter-alt.png";
+import logoImg from "../assets/logo.png";
 
 const NAV_LINKS = [
   { label: "AI Tools", href: "/ai-tools", submenu: ["SEO", "AI", "Automation", "Generative Tools"] },
@@ -102,8 +103,8 @@ export default function Home() {
       {/* Header */}
       <header className={`sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-md transition-shadow duration-300 ${scrolled ? 'shadow-[0_3px_5px_0_rgba(0,0,0,.16),0_3px_5px_0_rgba(0,0,0,.23)]' : ''}`}>
         <div className="container mx-auto px-6 h-20 flex items-center justify-between">
-          <Link href="/" className="text-3xl font-serif font-bold tracking-tight hover:opacity-80 transition-opacity" data-testid="logo">
-            Editorial.
+          <Link href="/" className="flex items-center hover:opacity-80 transition-opacity" data-testid="logo">
+            <img src={logoImg} alt="MSWOT Logo" className="h-10 w-auto object-contain" />
           </Link>
 
           <div className="hidden md:flex items-center space-x-8">
@@ -342,9 +343,9 @@ export default function Home() {
       <footer className="bg-black text-white pt-20 pb-12">
         <div className="container mx-auto px-6">
           {/* Layer 1: Company Name */}
-          <div className="text-center mb-16">
-            <Link href="/" className="text-6xl font-serif font-bold tracking-tight">
-              MSWOT.
+          <div className="flex justify-center mb-16">
+            <Link href="/" className="hover:opacity-80 transition-opacity">
+              <img src={logoImg} alt="MSWOT Logo" className="h-16 w-auto object-contain brightness-0 invert" />
             </Link>
           </div>
 

@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Link, useLocation } from "wouter";
 import { useState } from "react";
 import { Eye, EyeOff, ArrowRight } from "lucide-react";
+import logoImg from "../assets/logo.png";
 
 export default function AuthPage() {
   const [isLogin, setIsLogin] = useState(true);
@@ -19,7 +20,9 @@ export default function AuthPage() {
       {/* Visual Side */}
       <div className="hidden md:flex md:w-1/2 bg-black text-white p-20 flex-col justify-between relative overflow-hidden">
         <div className="relative z-10">
-          <Link href="/" className="text-4xl font-serif font-bold tracking-tight">Editorial.</Link>
+          <Link href="/" className="hover:opacity-80 transition-opacity">
+            <img src={logoImg} alt="MSWOT Logo" className="h-10 w-auto object-contain brightness-0 invert" />
+          </Link>
         </div>
         
         <div className="relative z-10 space-y-6">
