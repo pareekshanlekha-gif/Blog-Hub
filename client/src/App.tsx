@@ -11,7 +11,14 @@ import ContactPage from "@/pages/contact";
 import CareersPage from "@/pages/careers";
 import PrivacyPage from "@/pages/privacy";
 import TermsPage from "@/pages/terms";
-import AuthPage from "@/pages/auth";
+import LoginPage from "@/pages/login";
+import RegisterPage from "@/pages/register";
+import MyAccountPage from "@/pages/my-account";
+import CreatePostPage from "@/pages/create-post";
+import CreateTagsPage from "@/pages/create-tags";
+import PostsListPage from "@/pages/posts-list";
+import TagsListPage from "@/pages/tags-list";
+import UsersListPage from "@/pages/users-list";
 
 function Router() {
   return (
@@ -22,7 +29,14 @@ function Router() {
       <Route path="/careers" component={CareersPage} />
       <Route path="/privacy" component={PrivacyPage} />
       <Route path="/terms" component={TermsPage} />
-      <Route path="/auth" component={AuthPage} />
+      <Route path="/login" component={LoginPage} />
+      <Route path="/register" component={RegisterPage} />
+      <Route path="/my-account" component={MyAccountPage} />
+      <Route path="/create-post" component={CreatePostPage} />
+      <Route path="/create-tags" component={CreateTagsPage} />
+      <Route path="/posts-list" component={PostsListPage} />
+      <Route path="/tags-list" component={TagsListPage} />
+      <Route path="/users-list" component={UsersListPage} />
       <Route path="/blog/:id" component={BlogDetails} />
       <Route path="/:slug" component={CategoryPage} />
       <Route component={NotFound} />
