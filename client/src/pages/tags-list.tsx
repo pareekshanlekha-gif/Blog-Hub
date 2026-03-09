@@ -5,16 +5,15 @@ import { Link } from "wouter";
 import { Edit2, Trash2, Plus } from "lucide-react";
 
 export default function TagsListPage() {
-  const [tags, setTags] = useState([
-    { id: 1, name: "AI", description: "Artificial Intelligence", posts: 45 },
-    { id: 2, name: "Web Design", description: "Design for web", posts: 32 },
-    { id: 3, name: "SEO", description: "Search Engine Optimization", posts: 28 },
-    { id: 4, name: "Psychology", description: "Human behavior and cognition", posts: 19 },
-    { id: 5, name: "Branding", description: "Brand and identity design", posts: 24 },
+  const [headerMenuItems, setHeaderMenuItems] = useState([
+    { id: 1, label: "AI Tools", slug: "ai-tools", description: "Artificial Intelligence", posts: 45 },
+    { id: 2, label: "Platforms", slug: "platforms", description: "Digital Platforms", posts: 32 },
+    { id: 3, label: "SEO", slug: "seo", description: "Search Engine Optimization", posts: 28 },
+    { id: 4, label: "Psychology", slug: "psychology", description: "Human behavior and cognition", posts: 19 },
   ]);
 
-  const deleteTag = (id: number) => {
-    setTags(tags.filter(tag => tag.id !== id));
+  const deleteItem = (id: number) => {
+    setHeaderMenuItems(headerMenuItems.filter(item => item.id !== id));
   };
 
   return (
@@ -28,54 +27,61 @@ export default function TagsListPage() {
           className="max-w-6xl mx-auto"
         >
           <div className="flex justify-between items-center mb-8">
-            <h1 className="text-4xl font-serif font-bold">Tags</h1>
+            <h1 className="text-4xl font-serif font-bold">Header Menu Items</h1>
             <Link href="/create-tags">
               <button className="flex items-center gap-2 px-6 py-3 bg-black text-white font-bold uppercase tracking-widest text-xs rounded hover:bg-accent transition-all">
                 <Plus className="w-4 h-4" />
-                New Tag
+                New Item
               </button>
             </Link>
           </div>
 
-          {/* Tags Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {tags.map((tag, idx) => (
+          {/* Header Menu Items List */}
+          <div className="space-y-4">
+            {headerMenuItems.map((item, idx) => (
               <motion.div
-                key={tag.id}
+                key={item.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: idx * 0.1 }}
-                className="bg-white rounded-lg shadow-sm border border-border p-6 space-y-4"
+                className="bg-white rounded-lg shadow-sm border border-border p-6 flex items-center justify-between"
               >
-                <div className="flex items-start justify-between">
-                  <div>
-                    <h3 className="text-xl font-bold">{tag.name}</h3>
-                    <p className="text-sm text-gray-500 mt-1">{tag.description}</p>
-                  </div>
+                <div className="flex-1">
+                  <h3 className="text-lg font-bold">{item.label}</h3>
+                  <p className="text-sm text-gray-500 mt-1">{item.description}</p>
+                  <p className="text-xs text-gray-400 mt-2">Slug: <code className="bg-gray-100 px-2 py-1 rounded">{item.slug}</code></p>
                 </div>
 
-                <div className="py-3 border-t border-border">
-                  <p className="text-xs font-bold uppercase tracking-widest text-gray-400">
-                    Used in {tag.posts} posts
-                  </p>
+                <div className="text-right mx-6">
+                  <p className="text-2xl font-bold text-gray-800">{item.posts}</p>
+                  <p className="text-xs text-gray-400 uppercase tracking-widest">Posts</p>
                 </div>
 
                 <div className="flex gap-2">
-                  <button className="flex-1 flex items-center justify-center gap-2 py-2 text-blue-600 font-bold uppercase tracking-widest text-xs border border-blue-200 rounded hover:bg-blue-50 transition-all">
+                  <button className="p-2 text-blue-600 hover:bg-blue-50 rounded transition-colors">
                     <Edit2 className="w-4 h-4" />
-                    Edit
                   </button>
                   <button
-                    onClick={() => deleteTag(tag.id)}
-                    className="flex-1 flex items-center justify-center gap-2 py-2 text-red-600 font-bold uppercase tracking-widest text-xs border border-red-200 rounded hover:bg-red-50 transition-all"
+                    onClick={() => deleteItem(item.id)}
+                    className="p-2 text-red-600 hover:bg-red-50 rounded transition-colors"
                   >
                     <Trash2 className="w-4 h-4" />
-                    Delete
                   </button>
                 </div>
               </motion.div>
             ))}
           </div>
+
+          {headerMenuItems.length === 0 && (
+            <div className="text-center py-12">
+              <p className="text-gray-500 font-medium mb-4">No header menu items yet</p>
+              <Link href="/create-tags">
+                <button className="px-6 py-3 bg-black text-white font-bold uppercase tracking-widest text-xs rounded hover:bg-accent transition-all">
+                  Create First Item
+                </button>
+              </Link>
+            </div>
+          )}
         </motion.div>
       </main>
     </div>

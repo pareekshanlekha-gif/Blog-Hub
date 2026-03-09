@@ -19,6 +19,8 @@ import CreateTagsPage from "@/pages/create-tags";
 import PostsListPage from "@/pages/posts-list";
 import TagsListPage from "@/pages/tags-list";
 import UsersListPage from "@/pages/users-list";
+import SubscribersListPage from "@/pages/subscribers-list";
+import CategoriesPage from "@/pages/categories";
 
 function Router() {
   return (
@@ -37,6 +39,8 @@ function Router() {
       <Route path="/posts-list" component={PostsListPage} />
       <Route path="/tags-list" component={TagsListPage} />
       <Route path="/users-list" component={UsersListPage} />
+      <Route path="/subscribers-list" component={SubscribersListPage} />
+      <Route path="/categories" component={CategoriesPage} />
       <Route path="/blog/:id" component={BlogDetails} />
       <Route path="/:slug" component={CategoryPage} />
       <Route component={NotFound} />

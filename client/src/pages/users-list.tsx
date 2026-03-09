@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import AdminHeader from "../components/AdminHeader";
-import { Edit2, Trash2, Shield, User } from "lucide-react";
+import { Edit2, Trash2, Shield, User, Download } from "lucide-react";
 
 export default function UsersListPage() {
   const [users, setUsers] = useState([
@@ -11,6 +11,7 @@ export default function UsersListPage() {
       email: "john@example.com",
       role: "Admin",
       joinDate: "Jan 15, 2026",
+      lastLogin: "Mar 10, 2026",
       posts: 12,
       status: "Active",
     },
@@ -20,6 +21,7 @@ export default function UsersListPage() {
       email: "jane@example.com",
       role: "Editor",
       joinDate: "Feb 01, 2026",
+      lastLogin: "Mar 09, 2026",
       posts: 8,
       status: "Active",
     },
@@ -29,6 +31,7 @@ export default function UsersListPage() {
       email: "mike@example.com",
       role: "Contributor",
       joinDate: "Feb 15, 2026",
+      lastLogin: "Mar 08, 2026",
       posts: 5,
       status: "Active",
     },
@@ -38,6 +41,7 @@ export default function UsersListPage() {
       email: "sarah@example.com",
       role: "Contributor",
       joinDate: "Mar 01, 2026",
+      lastLogin: "Feb 20, 2026",
       posts: 2,
       status: "Inactive",
     },
@@ -45,6 +49,26 @@ export default function UsersListPage() {
 
   const deleteUser = (id: number) => {
     setUsers(users.filter(user => user.id !== id));
+  };
+
+  const exportCSV = () => {
+    const headers = ["Name", "Email", "Role", "Join Date", "Last Login", "Posts", "Status"];
+    const csvContent = [
+      headers.join(","),
+      ...users.map(user =>
+        [user.name, user.email, user.role, user.joinDate, user.lastLogin, user.posts, user.status].join(",")
+      )
+    ].join("\n");
+
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const link = document.createElement("a");
+    const url = URL.createObjectURL(blob);
+    link.setAttribute("href", url);
+    link.setAttribute("download", `users-${new Date().toISOString().split('T')[0]}.csv`);
+    link.style.visibility = "hidden";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   const getRoleBadgeColor = (role: string) => {
@@ -70,7 +94,16 @@ export default function UsersListPage() {
           animate={{ opacity: 1, y: 0 }}
           className="max-w-6xl mx-auto"
         >
-          <h1 className="text-4xl font-serif font-bold mb-8">Users</h1>
+          <div className="flex justify-between items-center mb-8">
+            <h1 className="text-4xl font-serif font-bold">Users</h1>
+            <button
+              onClick={exportCSV}
+              className="flex items-center gap-2 px-6 py-3 bg-black text-white font-bold uppercase tracking-widest text-xs rounded hover:bg-accent transition-all"
+            >
+              <Download className="w-4 h-4" />
+              Export CSV
+            </button>
+          </div>
 
           {/* Users Table */}
           <div className="bg-white rounded-lg shadow-sm border border-border overflow-hidden">
@@ -81,6 +114,7 @@ export default function UsersListPage() {
                   <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-widest">Email</th>
                   <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-widest">Role</th>
                   <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-widest">Join Date</th>
+                  <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-widest">Last Login</th>
                   <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-widest">Posts</th>
                   <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-widest">Status</th>
                   <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-widest">Actions</th>
@@ -109,6 +143,7 @@ export default function UsersListPage() {
                       </span>
                     </td>
                     <td className="px-6 py-4 text-sm text-gray-600">{user.joinDate}</td>
+                    <td className="px-6 py-4 text-sm text-gray-600">{user.lastLogin}</td>
                     <td className="px-6 py-4 text-sm font-medium">{user.posts}</td>
                     <td className="px-6 py-4">
                       <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest ${
