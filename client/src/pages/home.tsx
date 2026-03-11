@@ -86,6 +86,7 @@ export default function Home() {
   const [scrolled, setScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [expandedMenu, setExpandedMenu] = useState<string | null>(null);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -158,18 +159,56 @@ export default function Home() {
             
             <div className="h-4 w-px bg-border mx-2"></div>
             
-            <button className="p-2 hover:bg-secondary rounded-full transition-colors" data-testid="search-button">
+            <button 
+              className="p-2 hover:bg-secondary rounded-full transition-colors" 
+              onClick={() => setIsSearchOpen(!isSearchOpen)}
+              data-testid="search-button"
+            >
               <Search className="w-4 h-4" />
             </button>
           </div>
 
           {/* Mobile Search Button */}
           <div className="md:hidden">
-            <button className="p-2 hover:bg-secondary rounded-full transition-colors" data-testid="mobile-search-button">
+            <button 
+              className="p-2 hover:bg-secondary rounded-full transition-colors" 
+              onClick={() => setIsSearchOpen(!isSearchOpen)}
+              data-testid="mobile-search-button"
+            >
               <Search className="w-5 h-5" />
             </button>
           </div>
         </div>
+
+        {/* Search Overlay */}
+        <AnimatePresence>
+          {isSearchOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              className="absolute top-full left-0 w-full bg-white border-b border-border/40 shadow-lg py-4 px-6 z-40"
+            >
+              <div className="container mx-auto max-w-3xl flex items-center gap-4">
+                <div className="flex-1 flex items-center bg-gray-100 rounded-full px-4 py-2">
+                  <Search className="w-5 h-5 text-gray-500 mr-3" />
+                  <input
+                    type="text"
+                    placeholder="Search for articles, topics, or authors..."
+                    className="w-full bg-transparent border-none focus:outline-none text-black placeholder-gray-500"
+                    autoFocus
+                  />
+                </div>
+                <button
+                  onClick={() => setIsSearchOpen(false)}
+                  className="p-2 text-gray-600 hover:text-black transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* Mobile Menu Overlay */}
         <AnimatePresence>
@@ -190,7 +229,7 @@ export default function Home() {
               animate={{ x: 0 }}
               exit={{ x: "-100%" }}
               transition={{ type: "spring", bounce: 0, duration: 0.4 }}
-              className="fixed top-0 left-0 bottom-0 w-80 bg-white z-[70] shadow-xl flex flex-col md:hidden overflow-y-auto text-black"
+              className="fixed top-0 left-0 h-[100dvh] w-80 bg-white z-[70] shadow-xl flex flex-col md:hidden overflow-y-auto text-black"
             >
               <div className="h-20 flex items-center justify-between px-6 border-b border-border/40 sticky top-0 bg-white z-10">
                 <img src={logoImg} alt="MSWOT Logo" className="h-8 w-auto object-contain" />

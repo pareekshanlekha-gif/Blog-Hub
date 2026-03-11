@@ -99,7 +99,7 @@ export default function AdminHeader() {
             animate={{ x: 0 }}
             exit={{ x: "-100%" }}
             transition={{ type: "spring", bounce: 0, duration: 0.4 }}
-            className="fixed top-0 left-0 bottom-0 w-64 bg-white z-[70] shadow-xl flex flex-col md:hidden"
+            className="fixed top-0 left-0 h-[100dvh] w-64 bg-white z-[70] shadow-xl flex flex-col md:hidden"
           >
             <div className="h-20 flex items-center justify-between px-6 border-b border-border/40">
               <img src={logoImg} alt="MSWOT Logo" className="h-8 w-auto object-contain" />
