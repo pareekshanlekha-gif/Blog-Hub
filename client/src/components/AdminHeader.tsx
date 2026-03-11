@@ -83,52 +83,54 @@ export default function AdminHeader() {
       {/* Mobile Menu Overlay */}
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/50 z-[60] md:hidden"
-              onClick={() => setIsMobileMenuOpen(false)}
-            />
-            <motion.div
-              initial={{ x: "-100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "-100%" }}
-              transition={{ type: "spring", bounce: 0, duration: 0.4 }}
-              className="fixed top-0 left-0 bottom-0 w-64 bg-white z-[70] shadow-xl flex flex-col md:hidden"
-            >
-              <div className="h-20 flex items-center justify-between px-6 border-b border-border/40">
-                <img src={logoImg} alt="MSWOT Logo" className="h-8 w-auto object-contain" />
-                <button 
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="p-2 -mr-2 text-gray-600 hover:text-black hover:bg-gray-100 rounded-lg transition-colors"
-                >
-                  <X className="w-6 h-6" />
-                </button>
+          <motion.div
+            key="overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/50 z-[60] md:hidden"
+            onClick={() => setIsMobileMenuOpen(false)}
+          />
+        )}
+        {isMobileMenuOpen && (
+          <motion.div
+            key="menu"
+            initial={{ x: "-100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "-100%" }}
+            transition={{ type: "spring", bounce: 0, duration: 0.4 }}
+            className="fixed top-0 left-0 bottom-0 w-64 bg-white z-[70] shadow-xl flex flex-col md:hidden"
+          >
+            <div className="h-20 flex items-center justify-between px-6 border-b border-border/40">
+              <img src={logoImg} alt="MSWOT Logo" className="h-8 w-auto object-contain" />
+              <button 
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="p-2 -mr-2 text-gray-600 hover:text-black hover:bg-gray-100 rounded-lg transition-colors"
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+            
+            <div className="flex-1 overflow-y-auto py-6">
+              <div className="px-4 space-y-1">
+                <p className="px-2 text-xs font-bold uppercase tracking-widest text-gray-400 mb-4">Admin Menu</p>
+                {menuItems.map((item) => (
+                  <Link 
+                    key={item.label} 
+                    href={item.href} 
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={`block px-4 py-3 rounded-lg text-sm font-medium transition-colors cursor-pointer ${
+                      location === item.href 
+                        ? "bg-black text-white" 
+                        : "text-gray-700 hover:text-black hover:bg-gray-100"
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
               </div>
-              
-              <div className="flex-1 overflow-y-auto py-6">
-                <div className="px-4 space-y-1">
-                  <p className="px-2 text-xs font-bold uppercase tracking-widest text-gray-400 mb-4">Admin Menu</p>
-                  {menuItems.map((item) => (
-                    <Link key={item.label} href={item.href}>
-                      <span 
-                        className={`block px-4 py-3 rounded-lg text-sm font-medium transition-colors cursor-pointer ${
-                          location === item.href 
-                            ? "bg-black text-white" 
-                            : "text-gray-700 hover:text-black hover:bg-gray-100"
-                        }`}
-                        onClick={() => setIsMobileMenuOpen(false)}
-                      >
-                        {item.label}
-                      </span>
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          </>
+            </div>
+          </motion.div>
         )}
       </AnimatePresence>
     </header>

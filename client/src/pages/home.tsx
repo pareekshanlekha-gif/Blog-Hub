@@ -174,80 +174,79 @@ export default function Home() {
         {/* Mobile Menu Overlay */}
         <AnimatePresence>
           {isMobileMenuOpen && (
-            <>
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="fixed inset-0 bg-black/50 z-[60] md:hidden"
-                onClick={() => setIsMobileMenuOpen(false)}
-              />
-              <motion.div
-                initial={{ x: "-100%" }}
-                animate={{ x: 0 }}
-                exit={{ x: "-100%" }}
-                transition={{ type: "spring", bounce: 0, duration: 0.4 }}
-                className="fixed top-0 left-0 bottom-0 w-80 bg-white z-[70] shadow-xl flex flex-col md:hidden overflow-y-auto"
-              >
-                <div className="h-20 flex items-center justify-between px-6 border-b border-border/40 sticky top-0 bg-white z-10">
-                  <img src={logoImg} alt="MSWOT Logo" className="h-8 w-auto object-contain" />
-                  <button 
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="p-2 -mr-2 text-gray-600 hover:text-black hover:bg-gray-100 rounded-lg transition-colors"
-                  >
-                    <X className="w-6 h-6" />
-                  </button>
-                </div>
-                
-                <div className="flex-1 py-6 px-4 space-y-4">
-                  {NAV_LINKS.map((link) => (
-                    <div key={link.label} className="border-b border-border/40 last:border-0 pb-4 last:pb-0">
-                      <button
-                        onClick={() => setExpandedMenu(expandedMenu === link.label ? null : link.label)}
-                        className="w-full flex items-center justify-between py-2 text-lg font-serif font-bold hover:text-accent transition-colors"
-                      >
-                        {link.label}
-                        <ChevronDown className={`w-5 h-5 transition-transform duration-300 ${expandedMenu === link.label ? "rotate-180" : ""}`} />
-                      </button>
-                      
-                      <AnimatePresence>
-                        {expandedMenu === link.label && link.submenu && (
-                          <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: "auto", opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            className="overflow-hidden"
-                          >
-                            <div className="pl-4 py-2 space-y-3">
-                              {link.submenu.map((item) => (
-                                <Link 
-                                  key={item} 
-                                  href={`/${item.toLowerCase().replace(' ', '-')}`}
-                                >
-                                  <span
-                                    className="block text-sm text-gray-600 hover:text-black transition-colors cursor-pointer"
-                                    onClick={() => setIsMobileMenuOpen(false)}
-                                  >
-                                    {item}
-                                  </span>
-                                </Link>
-                              ))}
-                            </div>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </div>
-                  ))}
-                  
-                  <div className="pt-8 border-t border-border mt-8 space-y-4">
-                    <p className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-4">Quick Links</p>
-                    <Link href="/about"><span className="block text-sm text-gray-600 hover:text-black cursor-pointer">About Us</span></Link>
-                    <Link href="/contact"><span className="block text-sm text-gray-600 hover:text-black cursor-pointer">Contact</span></Link>
-                    <Link href="/auth"><span className="block text-sm font-bold text-black mt-4 cursor-pointer">Login / Admin</span></Link>
+            <motion.div
+              key="overlay"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black/50 z-[60] md:hidden"
+              onClick={() => setIsMobileMenuOpen(false)}
+            />
+          )}
+          {isMobileMenuOpen && (
+            <motion.div
+              key="menu"
+              initial={{ x: "-100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "-100%" }}
+              transition={{ type: "spring", bounce: 0, duration: 0.4 }}
+              className="fixed top-0 left-0 bottom-0 w-80 bg-white z-[70] shadow-xl flex flex-col md:hidden overflow-y-auto text-black"
+            >
+              <div className="h-20 flex items-center justify-between px-6 border-b border-border/40 sticky top-0 bg-white z-10">
+                <img src={logoImg} alt="MSWOT Logo" className="h-8 w-auto object-contain" />
+                <button 
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="p-2 -mr-2 text-gray-600 hover:text-black hover:bg-gray-100 rounded-lg transition-colors"
+                >
+                  <X className="w-6 h-6" />
+                </button>
+              </div>
+              
+              <div className="flex-1 py-6 px-4 space-y-4">
+                {NAV_LINKS.map((link) => (
+                  <div key={link.label} className="border-b border-border/40 last:border-0 pb-4 last:pb-0">
+                    <button
+                      onClick={() => setExpandedMenu(expandedMenu === link.label ? null : link.label)}
+                      className="w-full flex items-center justify-between py-2 text-lg font-serif font-bold text-black hover:text-accent transition-colors"
+                    >
+                      {link.label}
+                      <ChevronDown className={`w-5 h-5 transition-transform duration-300 ${expandedMenu === link.label ? "rotate-180" : ""}`} />
+                    </button>
+                    
+                    <AnimatePresence>
+                      {expandedMenu === link.label && link.submenu && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          className="overflow-hidden"
+                        >
+                          <div className="pl-4 py-2 space-y-3">
+                            {link.submenu.map((item) => (
+                              <Link 
+                                key={item} 
+                                href={`/${item.toLowerCase().replace(' ', '-')}`}
+                                onClick={() => setIsMobileMenuOpen(false)}
+                                className="block text-sm text-gray-600 hover:text-black transition-colors cursor-pointer"
+                              >
+                                {item}
+                              </Link>
+                            ))}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </div>
+                ))}
+                
+                <div className="pt-8 border-t border-border mt-8 space-y-4">
+                  <p className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-4">Quick Links</p>
+                  <Link href="/about" onClick={() => setIsMobileMenuOpen(false)} className="block text-sm text-gray-600 hover:text-black cursor-pointer">About Us</Link>
+                  <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)} className="block text-sm text-gray-600 hover:text-black cursor-pointer">Contact</Link>
+                  <Link href="/auth" onClick={() => setIsMobileMenuOpen(false)} className="block text-sm font-bold text-black mt-4 cursor-pointer">Login / Admin</Link>
                 </div>
-              </motion.div>
-            </>
+              </div>
+            </motion.div>
           )}
         </AnimatePresence>
       </header>
